@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Address | dermis+</title>
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
+    background:#f5f5f7;
+    color:#222;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  header{
+    position:fixed;top:0;left:0;width:100%;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;background:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,0.08);
+    z-index:1000;
+  }
+  .left-icons,.right-icons{display:flex;align-items:center;gap:14px;}
+  svg{width:17px;height:17px;stroke:#222;stroke-width:1.8;fill:none;cursor:pointer;}
+  .logo{display:flex;flex-direction:column;align-items:center;text-align:center;font-size:23px;font-weight:700;text-transform:lowercase;}
+  .plus{color:#2BA6D2;margin-left:2px;}
+  .tagline{font-size:12px;color:#555;font-weight:500;margin-top:2px;text-transform:lowercase;}
+  .container{max-width:450px;margin:0 auto;padding:0 18px;}
+  .form-box{background:#fff;margin-top:90px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);padding:22px;}
+  h2{text-align:center;font-size:18px;font-weight:700;margin-bottom:18px;}
+  label{font-size:13px;color:#444;display:block;margin-bottom:4px;font-weight:500;}
+  input{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;margin-bottom:14px;background:#fafafa;}
+  input:focus{outline:none;border-color:#2BA6D2;background:#fff;}
+  .submit-btn{
+    background:#2BA6D2;color:#fff;font-weight:600;border:none;border-radius:10px;
+    padding:12px 18px;width:100%;font-size:15px;cursor:pointer;
+    transition:transform .25s,box-shadow .25s;
+  }
+  .submit-btn:hover{transform:scale(1.04);box-shadow:0 6px 14px rgba(43,166,210,0.35);}
+  .success-message{
+    display:none;text-align:center;background:#e9f9f9;border:1px solid #2BA6D2;
+    border-radius:10px;padding:12px;margin-top:10px;color:#2BA6D2;font-size:14px;font-weight:600;
+  }
+  footer{
+    background:#111;color:#fff;padding:35px 20px;margin-top:60px;
+    box-shadow:0 -6px 18px rgba(0,0,0,0.08);
+  }
+  footer a{color:#ccc;text-decoration:none;font-size:13px;display:block;margin:4px 0;}
+  footer h4{font-size:14px;font-weight:600;margin-top:10px;}
+  footer p{font-size:13px;color:#ccc;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="left-icons">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </div>
+  <div class="logo">
+    <div><span>dermis</span><span class="plus">+</span></div>
+    <div class="tagline">from the maker of uae 🇦🇪 essentials</div>
+  </div>
+  <div class="right-icons"></div>
+</header>
+
+<!-- ADDRESS FORM -->
+<div class="container">
+  <div class="form-box" id="formBox">
+    <h2>Shipping Address</h2>
+    <form id="addressForm">
+      <label>Name:</label><input type="text" name="name" required>
+      <label>Surname:</label><input type="text" name="surname" required>
+      <label>WhatsApp Number:</label><input type="tel" name="whatsapp" required>
+      <label>Email Address:</label><input type="email" name="email">
+      <label>Address Line 1:</label><input type="text" name="address1" required>
+      <label>Address Line 2:</label><input type="text" name="address2">
+      <label>Post:</label><input type="text" name="post">
+      <label>District:</label><input type="text" name="district">
+      <label>State:</label><input type="text" name="state">
+      <label>Pin Code:</label><input type="number" name="pincode" required>
+      <button type="submit" class="submit-btn">SUBMIT</button>
+    </form>
+    <div id="successMsg" class="success-message">✅ Thank you! Please continue on WhatsApp to confirm your address.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:450px;margin:auto;">
+    <h4 style="font-size:15px;font-weight:700;">dermis+</h4>
+    <p>from the maker of UAE essentials 🇦🇪</p>
+    <div style="margin-top:18px;">
+      <h4>quick links</h4>
+      <a href="Home.html">home</a>
+      <a href="#">about</a>
+      <a href="#">contact</a>
+    </div>
+    <div style="margin-top:20px;">
+      <h4>contact us</h4>
+      <p>📧 info@dermisplus.com</p>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:12px;color:#aaa;margin-top:25px;">© 2025 dermis+ — All rights reserved</p>
+</footer>
+
+<!-- SCRIPT -->
+<script>
+document.getElementById('addressForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const form = e.target;
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  // Ask for consent before sending
+  const confirmSend = confirm(
+    "dermis+ is a WhatsApp-based eco system.\nWe collect address details via WhatsApp only.\n\nWould you like to open WhatsApp to send your details?"
+  );
+  if (!confirmSend) return;
+
+  // Create WhatsApp message
+  const message =
+    `🌿 *dermis+ Order Confirmation*%0A` +
+    `─────────────────────────────%0A` +
+    `Hello Team dermis+,%0A` +
+    `I’m sharing my shipping details below as part of the dermis+ WhatsApp-based order system.%0A%0A` +
+    `*Name:* ${data.name} ${data.surname}%0A` +
+    `*WhatsApp:* ${data.whatsapp}%0A` +
+    `*Email:* ${data.email || '-'}%0A` +
+    `*Address:* ${data.address1}, ${data.address2 || ''}%0A` +
+    `*Post:* ${data.post || '-'}%0A` +
+    `*District:* ${data.district || '-'}%0A` +
+    `*State:* ${data.state || '-'}%0A` +
+    `*Pin Code:* ${data.pincode}%0A%0A` +
+    `✅ *Your address has been submitted successfully.*%0A` +
+    `Please return to Chrome — the payment page is now open for you to confirm your order.%0A%0A` +
+    `Thank you for choosing *dermis+* 💙`;
+
+  const whatsappNumber = "9928594410";
+  const waUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+  // Open WhatsApp immediately (user-initiated, no block)
+  window.open(waUrl, "_blank");
+
+  // Show message and redirect
+  document.getElementById("successMsg").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Redirect to payment page
+  setTimeout(() => {
+    window.location.href = "payment.html";
+  }, 2500);
+
+  form.reset();
+});
+</script>
+
+</body>
+</html>
